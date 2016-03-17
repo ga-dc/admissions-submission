@@ -1,19 +1,21 @@
-  <textarea name="name" rows="8" cols="40" id="code" class='left'>
-    {{blob}}
-  </textarea>
-<div class='right'>
-<button id="submit" name="button">Check</button>
-<section id="tests">
-</section>
-</div>
-<div id="fixture">
-  <ul id="switcher">
-    <li class='one' id="redButton"></li>
-    <li class='two' id="whiteButton"></li>
-    <li class='three' id="blueButton"></li>
-    <li class='four' id="yellowButton"></li>
-  </ul>
-</div>
+<form action="/{{ _id }}" method="post" name="form">
+  <textarea name="blob" rows="8" cols="40" id="code" class='left'>{{blob}}</textarea>
+  <input type="hidden" name="score" value="">
+
+  <div class='right'>
+    <button id="check" type="submit" name="button">Check</button>
+    <section id="tests">
+    </section>
+  </div>
+  <div id="fixture">
+    <ul id="switcher">
+      <li class='one' id="redButton"></li>
+      <li class='two' id="whiteButton"></li>
+      <li class='three' id="blueButton"></li>
+      <li class='four' id="yellowButton"></li>
+    </ul>
+  </div>
+</form>
 
 </body>
 </html>

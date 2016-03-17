@@ -1,4 +1,4 @@
-;(function(){
+(function(){
   console.log("here")
   var ael  = EventTarget.prototype.addEventListener
   EventTarget.prototype.addEventListener = function(e,cb){
@@ -6,19 +6,28 @@
     this.listeners++;
     ael.call(this,e,cb)
   }
-  var btn = document.querySelector("#submit");
+  var btn = document.querySelector("#check");
   var tests = document.getElementById("tests");
+  var scoreInput = document.querySelector("[name='score']");
+  var form = document.querySelector("form");
+  var code = document.querySelector("#code")
+  var totalTests = 0;
+  var score = 0;
+
   function test(description, one){
     var div = document.createElement("div");
     div.innerHTML = "<h3>"+description+"</h3>"
     if(!!one){
       div.innerHTML += "passed";
       div.classList.add("pass");
+      score++;
     }else{
       div.innerHTML += "fail";
       div.classList.add("fail");
     }
     tests.appendChild(div);
+    totalTests++;
+    scoreInput.value = score + "/" + totalTests;
   }
 
   function checkBg(color){
@@ -28,8 +37,7 @@
 
   btn.addEventListener("click", function(event){
     event.preventDefault();
-    var code =  document.querySelector("#code").value
-    eval(code);
+    eval(code.value);
     tests.innerHTML = "";
 
     var red = document.getElementById("redButton");
@@ -49,6 +57,17 @@
     var yellow = document.getElementById("yellowButton");
     test("yellow button has event listener", yellow.listeners);
     yellow.listeners = 0;
+
+    $.ajax({
+      method: "post",
+      url: form.action,
+      data: {
+        date: new Date,
+        score: scoreInput.value,
+        blob: code.value
+      }
+    });
+    // document.querySelector("form").submit();
  })
 
 })();

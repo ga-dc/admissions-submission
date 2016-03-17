@@ -22,11 +22,31 @@ app.get("/insecure", function(req, res){
   })
 })
 
+app.post("/insecure", function(req, res){
+  Submission.create({email: req.body.email}, function(err, submission){
+    res.redirect("/" + submission._id);
+  })
+})
+
 app.get("/:id", function(req, res){
   Submission.findOne({_id: req.params.id}, function(err, doc){
-    console.log(doc)
-    var blob = doc.tests[doc.tests.length - 1].blob
-    res.render("index", {blob: blob})
+    var blob = doc.tests.length ? doc.tests[doc.tests.length - 1].blob : "// Insert code here."
+    res.render("index", {blob: blob, _id: doc._id})
+  })
+})
+
+app.post("/:id", function(req, res){
+  Submission.findOne({_id: req.params.id}, function(err, doc){
+    doc.tests.push({
+      time: new Date(),
+      blob: req.body.blob,
+      score: req.body.score
+    })
+    doc.save(function(err){
+      console.log(doc);
+      var blob = doc.tests.length ? doc.tests[doc.tests.length - 1].blob : "// Insert code here."
+      res.redirect("/" + doc._id)
+    })
   })
 })
 
