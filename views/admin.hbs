@@ -2,3 +2,9 @@
   <input type="email" name="email" value="">
   <button type="submit" name="button">Generate Student Link</button>
 </form>
+
+<h2>Recent Submissions</h2>
+
+{{#each submissions}}
+  <a href='/{{_id}}'>{{email}}</a>
+{{/each}}
