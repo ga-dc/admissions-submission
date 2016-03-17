@@ -8,16 +8,6 @@ app.use(express.static('public'));
 
 mongoose.connect("mongodb://localhost/admissions");
 
-var Test = mongoose.model("Test",{
-  time: Date,
-  score: String,
-  blob: String
-})
-
-var Submission = mongoose.model("Submission", {
-  encryptedEmail: String,
-  tests: [Test]
-})
 
 app.use(bodyParser.urlencoded())
 app.set("view engine","hbs");
