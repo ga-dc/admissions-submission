@@ -18,6 +18,12 @@ app.get("/", function(req, res){
 
 app.get("/insecure", function(req, res){
   Submission.find({}, function(err, submissions){
+    submissions = submissions.map(function(submission){
+      if(submission.tests.length){
+        submission.lastTest = submission.tests[submission.tests.length - 1]
+      }
+      return submission
+    })
     res.render("admin",{submissions: submissions})
   })
 })

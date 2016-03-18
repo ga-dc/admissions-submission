@@ -1,10 +1,17 @@
-<form class="" action="/insecure" method="post">
-  <input type="email" name="email" value="" placeholder="Email Address">
-  <button type="submit" name="button">Generate Student Link</button>
-</form>
+<div class="admin">
+  <form class="" action="/insecure" method="post">
+    <input type="email" name="email" value="" placeholder="Email Address">
+    <button type="submit" name="button">Generate Student Link</button>
+  </form>
 
-<h2>Recent Submissions</h2>
+  <h2>Recent Submissions</h2>
 
-{{#each submissions}}
-  <a href='/{{_id}}'>{{email}}</a>
-{{/each}}
+  {{#each submissions}}
+    <div class="">
+      <h2><a href='/{{_id}}'>{{email}}</a></h2>
+      {{#if lastTest}}
+        {{lastTest.time}} - {{lastTest.score}}
+      {{/if}}
+    </div>
+  {{/each}}
+</div>

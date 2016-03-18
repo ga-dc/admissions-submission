@@ -36,6 +36,8 @@
   }
 
   btn.addEventListener("click", function(event){
+    totalTests = 0;
+    score = 0;
     event.preventDefault();
     eval(code.value);
     tests.innerHTML = "";

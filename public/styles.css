@@ -70,3 +70,9 @@ textarea{
 .fail:before{
   content:'\2715';
 }
+
+.admin{
+  padding:2em;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+
+}
